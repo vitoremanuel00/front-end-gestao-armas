@@ -44,9 +44,9 @@ export function Arma(props) {
                             label='Nome da arma'
                             placeholder='Insira o nome da arma'
                             required={true}
-                            name='nameArma'
-                            error={errors.nameArma}
-                            validations={register('nameArma', {
+                            name='nome_arma'
+                            error={errors.nome_arma}
+                            validations={register('nome_arma', {
                                 required: {
                                     value: true,
                                     message: 'Nome da arma é obrigatória.'
@@ -61,7 +61,7 @@ export function Arma(props) {
                             placeholder='Insira a marca da arma'
                             required={true}
                             name='Marca'
-                            error={errors.nameArma}
+                            error={errors.nome_arma}
                             validations={register('marca', {
                                 required: {
                                     value: true,

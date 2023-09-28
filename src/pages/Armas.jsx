@@ -12,13 +12,26 @@ import { createArma, deleteArma, getArmas, updateArma } from "../services/arma-s
 export function Armas() {
     const [armas, setArmas] = useState([]);
     const [isCreated, setIsCreated] = useState(false);
-    const { handleSubmit, register, formState: { errors }, reset } = useForm();
+    const { handleSubmit, register, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
     useEffect(() => {
         findArmas();
         // eslint-disable-next-line
     }, []);
+
+    async function addArma(data) {
+        try {
+            await createArma(data);
+            setIsCreated(false);
+            await findArmas();
+        } catch (error) {
+
+            if (error.response) {
+                console.error("Resposta de erro do servidor:", error.response.data);
+            }
+        }
+    }
 
     async function findArmas() {
         try {
@@ -41,23 +54,14 @@ export function Armas() {
         }
     }
 
-    async function addArma(data) {
-        try {
-            await createArma(data);
-            setIsCreated(false);
-            await findArmas();
-            reset();
-        } catch (error) {
-            console.error(error);
-        }
-    }
+
 
 
     async function editArma(data) {
         try {
             await updateArma({
                 id: data.id,
-                nome_arma: data.nameArma,
+                nome_arma: data.nome_arma,
                 modelo: data.modelo,
                 marca: data.marca,
                 numero_de_serie: data.numero_de_serie
@@ -107,9 +111,9 @@ export function Armas() {
                             label='Nome da arma'
                             placeholder='Insira o nome da arma'
                             required={true}
-                            name='nameArma'
-                            error={errors.nameArma}
-                            validations={register('nameArma', {
+                            name='nome_arma'
+                            error={errors.nome_arma}
+                            validations={register('nome_arma', {
                                 required: {
                                     value: true,
                                     message: 'Nome da arma é obrigatória.'
@@ -137,9 +141,9 @@ export function Armas() {
                             label='Número de Série da arma'
                             placeholder='Insira o número de série da arma'
                             required={true}
-                            name='numeroSerie'
-                            error={errors.numeroSerie}
-                            validations={register('numeroSerie', {
+                            name='numero_de_serie'
+                            error={errors.numero_de_serie}
+                            validations={register('numero_de_serie', {
                                 required: {
                                     value: true,
                                     message: 'Número de série da arma é obrigatória.'

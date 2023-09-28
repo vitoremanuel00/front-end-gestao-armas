@@ -4,16 +4,13 @@ export async function createArma(data) {
     const accessToken = sessionStorage.getItem('token');
     console.log('Token:', accessToken);
     console.log('Data:', data);
-
     try {
         const result = await api.post('/arma', data, {
             headers: {
                 'Authorization': `Bearer ${JSON.parse(accessToken)}`
             }
         });
-
         console.log('Result:', result.data);
-
         return result;
     } catch (error) {
         console.error('Error:', error);
@@ -30,7 +27,6 @@ export async function getArmas() {
         });
         console.log("Após a requisição bem-sucedida");
         return result;
-
 }
 
 export async function deleteArma(id) {

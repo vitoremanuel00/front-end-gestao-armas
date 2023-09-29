@@ -25,7 +25,7 @@ export function Navigations() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/home" element={<HomePage />} /> {/* Adicione esta rota */}
                 <Route path="/armas" element={<Armas />} />
-                <Route path="/armas-emprestadas" element={<ArmasEmprestadas />} />
+                <Route path="/listaremprestimos" element={<ArmasEmprestadas />} />
             </Routes>
         </BrowserRouter>
     );

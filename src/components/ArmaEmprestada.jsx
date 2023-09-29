@@ -1,45 +1,60 @@
 import React, { useState } from "react";
 import { Card, Button, Form } from "react-bootstrap";
 
-export function ArmaEmprestada({ armaEmprestada, removerArmaEmprestada, editarObservacoesArmaEmprestada }) {
-  const [observacoes, setObservacoes] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
+export default function ArmaEmprestada(props){
 
-  function handleEditClick() {
-    setObservacoes(armaEmprestada.observacoes || "");
-    setIsEditing(true);
-  }
+    const { handleSubmit, register, formState: { errors } } = useForm();
+    const [isUpdated, setIsUpdated] = useState(false);
 
-  async function handleSaveClick() {
-    await editarObservacoesArmaEmprestada({ id: armaEmprestada.id, observacoes });
-    setIsEditing(false);
-  }
+    async function editArmasEmprestadas(data) {
+        await props.editArmasEmprestadas({ ...data, id: props.arma.id });
+        setIsUpdated(false);
+    }
 
   return (
-    <Card className="mb-3">
-      <Card.Header>
-        <strong>Arma emprestada ID: {armaEmprestada.id}</strong>
-      </Card.Header>
+    <Card className="mb-3 bg-light">
       <Card.Body>
-        <Form.Group controlId={`observacoes-${armaEmprestada.id}`}>
-          <Form.Label>Observações:</Form.Label>
-          {isEditing ? (
-            <>
-              <Form.Control as="textarea" value={observacoes} onChange={(e) => setObservacoes(e.target.value)} />
-              <Button variant="primary" className="mt-3" onClick={handleSaveClick}>
-                Salvar
-              </Button>
-            </>
-          ) : (
-            <Form.Control plaintext readOnly defaultValue={observacoes} />
-          )}
-        </Form.Group>
-        <Button variant="danger" className="mr-2" onClick={removerArmaEmprestada}>
-          Devolver Arma
-        </Button>
-        <Button variant="secondary" onClick={handleEditClick}>
-          Editar Observações
-        </Button>
+        <Card.Title><strong>Arma emprestada</strong></Card.Title>
+        <Card.Text>
+          <strong>ID:</strong> {props.armaEmprestada.id}
+        </Card.Text>
+        <Card.Text>
+          <strong>Número de Série da Arma:</strong> {props.armaEmprestada.arma.numero_de_serie}
+        </Card.Text>
+        <Card.Text>
+          <strong>Data de Empréstimo:</strong> {props.armaEmprestada.data_emprestimo}
+        </Card.Text>
+        <Card.Text>
+          <strong>Data de Devolução:</strong> {props.armaEmprestada.data_devolucao}
+        </Card.Text>
+        {isEditing ? (
+          <Form>
+            <Form.Group controlId={`observacoes-${armaEmprestada.id}`}>
+              <Form.Label>Observações:</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={observacoes}
+                onChange={handleObservacoesChange}
+              />
+            </Form.Group>
+            <Button variant="primary" onClick={handleSaveClick}>
+              Salvar
+            </Button>
+          </Form>
+        ) : (
+          <>
+            <Card.Text>
+              <strong>Observações:</strong> {armaEmprestada.observacoes || "Nenhuma observação"}
+            </Card.Text>
+            <Button variant="info" onClick={handleEditClick}>
+              Editar Observações
+            </Button>
+            <Button variant="danger" onClick={removerArmaEmprestada}>
+              Devolver Arma
+            </Button>
+          </>
+        )}
       </Card.Body>
     </Card>
   );

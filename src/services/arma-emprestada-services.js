@@ -1,7 +1,6 @@
 import {api} from "./api";
 
-
-export async function criarArmaEmprestada(data) {
+export async function createArmaEmprestada(data) {
     const accessToken = sessionStorage.getItem('token');
     console.log('Token:', accessToken);
     console.log('Data:', data);
@@ -19,7 +18,7 @@ export async function criarArmaEmprestada(data) {
     }
 }
 
-export async function listarArmasEmprestadas() {
+export async function getArmasEmprestadas() {
     const accessToken = sessionStorage.getItem('token');
     const result = await api.get('/listaremprestimos', {
         headers: {
@@ -30,7 +29,7 @@ export async function listarArmasEmprestadas() {
     return result;
 }
 
-export async function devolverArma(id) {
+export async function deleteArmasEmprestadas(id) {
     const accessToken = sessionStorage.getItem('token');
     const result = await api.delete(`/arma-devolucao?id=${id}`,{
         headers: {
@@ -44,7 +43,7 @@ export async function devolverArma(id) {
     }
   }
 
-export async function atualizarObservacoes(data) {
+export async function updateArmasEmprestadas(data) {
     const accessToken = sessionStorage.getItem('token');
     const result = await api.put(`/arma-emprestada/observacoes/${data.id}`, data,{
         observacoes: data.observacoes,

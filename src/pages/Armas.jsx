@@ -21,7 +21,7 @@ export function Armas() {
         // eslint-disable-next-line
     }, []);
 
-    async function addArma(data) {
+        async function addArma(data) {
         try {
 
             const response = await createArma(data);

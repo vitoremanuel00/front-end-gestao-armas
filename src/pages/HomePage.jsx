@@ -8,7 +8,7 @@ export default function HomePage() {
         <Link to="/armas">
           <button>Ir para Armas</button>
         </Link>
-        <Link to="/armas-emprestadas">
+        <Link to="/listaremprestimos">
           <button>Ir para Armas Emprestadas</button>
         </Link>
       </div>

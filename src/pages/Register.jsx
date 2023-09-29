@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
 import { Header } from '../components/Header';
 import { Modal } from '../components/Modal';
+import './styles.css';
 
 import { registerUser } from "../services/user-services";
 
@@ -118,7 +119,9 @@ export function Register() {
                     />
                     <div className="d-flex justify-content-between">
                         <Button type="submit">Criar</Button>
-                        <Link to="/">Já tenho uma conta</Link>
+                        <Link to="/" className="btn btn-custom btn-block">
+             Ja tenho uma conta
+            </Link>
                     </div>
                 </Col>
             </Form>

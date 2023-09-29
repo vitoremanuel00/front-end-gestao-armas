@@ -1,61 +1,71 @@
-import React, { useState } from "react";
-import { Card, Button, Form } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Card, Form, Modal, Row } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 
-export default function ArmaEmprestada(props){
+import { Input } from "./Input";
 
-    const { handleSubmit, register, formState: { errors } } = useForm();
-    const [isUpdated, setIsUpdated] = useState(false);
+export function ArmaEmprestada(props) {
+  const { handleSubmit, register, formState: { errors } } = useForm();
+  const [isUpdated, setIsUpdated] = useState(false);
 
-    async function editArmasEmprestadas(data) {
-        await props.editArmasEmprestadas({ ...data, id: props.arma.id });
-        setIsUpdated(false);
-    }
+  async function editArmaEmprestada(data) {
+    await props.editArmaEmprestada({ ...data, id: props.armaEmprestada.id });
+    setIsUpdated(false);
+  }
 
   return (
-    <Card className="mb-3 bg-light">
-      <Card.Body>
-        <Card.Title><strong>Arma emprestada</strong></Card.Title>
-        <Card.Text>
-          <strong>ID:</strong> {props.armaEmprestada.id}
-        </Card.Text>
-        <Card.Text>
-          <strong>Número de Série da Arma:</strong> {props.armaEmprestada.arma.numero_de_serie}
-        </Card.Text>
-        <Card.Text>
-          <strong>Data de Empréstimo:</strong> {props.armaEmprestada.data_emprestimo}
-        </Card.Text>
-        <Card.Text>
-          <strong>Data de Devolução:</strong> {props.armaEmprestada.data_devolucao}
-        </Card.Text>
-        {isEditing ? (
-          <Form>
-            <Form.Group controlId={`observacoes-${armaEmprestada.id}`}>
-              <Form.Label>Observações:</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={observacoes}
-                onChange={handleObservacoesChange}
-              />
-            </Form.Group>
-            <Button variant="primary" onClick={handleSaveClick}>
-              Salvar
+    <>
+      <Card className="mb-3 p-3 bg-light">
+        <Card.Title><strong>ID: </strong>{props.armaEmprestada.id}</Card.Title>
+        <Card.Text><strong>Data de Empréstimo: </strong>{props.armaEmprestada.data_emprestimo}</Card.Text>
+        <Card.Text><strong>Data de Devolução: </strong>{props.armaEmprestada.data_devolucao}</Card.Text>
+        <Card.Text><strong>Status </strong>{props.armaEmprestada.status}</Card.Text>
+        <Row xs="auto" className="d-flex justify-content-end">
+          <Button variant="secondary" onClick={() => setIsUpdated(true)}>Editar</Button>
+          <Button
+            variant="outline-danger"
+            className="ms-3"
+            onClick={props.removeArmasEmprestadas}
+          >
+            Devolver
+          </Button>
+        </Row>
+      </Card>
+      <Modal show={isUpdated} onHide={() => setIsUpdated(false)}>
+        <Modal.Header>
+          <Modal.Title>Editar Arma Emprestada: ID {props.armaEmprestada.id}</Modal.Title>
+        </Modal.Header>
+        <Form noValidate onSubmit={handleSubmit(editArmaEmprestada)} validated={!!errors}>
+          <Modal.Body>
+            {/* Inclua os campos que deseja editar aqui */}
+            <Input
+              className="mb-3"
+              type="text"
+              defaultValue={props.armaEmprestada.observacoes}
+              label="Observações"
+              placeholder="Insira observações"
+              required={true}
+              name="observacoes"
+              error={errors.observacoes}
+              validations={register('observacoes', {
+                required: {
+                  value: true,
+                  message: 'Observações são obrigatórias.'
+                }
+              })}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" type="submit">
+              Editar
             </Button>
-          </Form>
-        ) : (
-          <>
-            <Card.Text>
-              <strong>Observações:</strong> {armaEmprestada.observacoes || "Nenhuma observação"}
-            </Card.Text>
-            <Button variant="info" onClick={handleEditClick}>
-              Editar Observações
+            <Button variant="secondary" onClick={() => setIsUpdated(false)}>
+              Fechar
             </Button>
-            <Button variant="danger" onClick={removerArmaEmprestada}>
-              Devolver Arma
-            </Button>
-          </>
-        )}
-      </Card.Body>
-    </Card>
+          </Modal.Footer>
+        </Form>
+      </Modal>
+    </>
   );
 }
+export default ArmaEmprestada;

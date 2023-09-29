@@ -1,4 +1,4 @@
-import { Container, Col, Modal, Form, Button, Row } from "react-bootstrap";
+import { Container, Col, Modal, Form, Button, Row, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
@@ -13,6 +13,7 @@ export function Armas() {
     const [armas, setArmas] = useState([]);
     const [isCreated, setIsCreated] = useState(false);
     const { handleSubmit, register, formState: { errors } } = useForm();
+    const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,7 +23,10 @@ export function Armas() {
 
     async function addArma(data) {
         try {
-            await createArma(data);
+
+            const response = await createArma(data);
+            const newArma = response.data;
+            setSuccessMessage(`Arma cadastrada com sucesso! Dados da arma: Nome: ${newArma.nome_arma}, Marca: ${newArma.marca}, Número de Série: ${newArma.numero_de_serie}, Modelo: ${newArma.modelo}`);
             setIsCreated(false);
             await findArmas();
         } catch (error) {
@@ -56,7 +60,6 @@ export function Armas() {
 
 
 
-
     async function editArma(data) {
         try {
             await updateArma({
@@ -86,6 +89,13 @@ export function Armas() {
                     }}>Sair</Button>
                 </Col>
             </Row>
+            {successMessage && (
+                <Row className="w-50 m-auto mb-3">
+                    <Col>
+                        <Alert variant="success">{successMessage}</Alert>
+                    </Col>
+                </Row>
+            )}
             <Col className="w-50 m-auto">
                 {armas && armas.length > 0
                     ? armas.map((arma, index) => (

@@ -1,6 +1,7 @@
 import {api} from "./api";
 
-export async function createArmaEmprestada(data) {
+
+export async function criarArmaEmprestada(data) {
     const accessToken = sessionStorage.getItem('token');
     console.log('Token:', accessToken);
     console.log('Data:', data);
@@ -18,7 +19,7 @@ export async function createArmaEmprestada(data) {
     }
 }
 
-export async function getArmasEmprestadas() {
+export async function listarArmasEmprestadas() {
     const accessToken = sessionStorage.getItem('token');
     const result = await api.get('/listaremprestimos', {
         headers: {

@@ -3,13 +3,15 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Armas } from "./pages/Armas";
 import { isAuthenticated } from "./utils/is-authenticated";
+import HomePage from "./pages/HomePage";
+import ArmasEmprestadas from "./pages/ArmasEmprestadas";
 
 /**
  * Cria rotas autenticadas
  */
 export function PrivateRoute({ children }) {
     if (!isAuthenticated()) {
-        return <Navigate to="/armas" replace />;
+        return <Navigate to="/home" replace />;
     }
     return children;
 }
@@ -21,9 +23,11 @@ export function Navigations() {
                 <Route index path="/" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/" element={<Armas />}/>
+                <Route path="/home" element={<HomePage />} /> {/* Adicione esta rota */}
                 <Route path="/armas" element={<Armas />} />
+                <Route path="/armas-emprestadas" element={<ArmasEmprestadas />} />
             </Routes>
         </BrowserRouter>
     );
 }
+

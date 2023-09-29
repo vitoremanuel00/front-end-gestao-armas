@@ -1,0 +1,10 @@
+.btn-custom {
+    background-color: #4caf50 !important;
+    color: #fff !important;
+    border: none !important;
+  }
+
+  .btn-custom:hover {
+    background-color: #45a049 !important;
+  }
+

@@ -10,7 +10,7 @@ import {
   devolverArma,
 } from "../services/arma-emprestada-services";
 
-export function ArmasEmprestadas() {
+export default function ArmasEmprestadas() {
   const [armasEmprestadas, setArmasEmprestadas] = useState([]);
   const [isCreated, setIsCreated] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -18,28 +18,29 @@ export function ArmasEmprestadas() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    listarArmasEmprestadas();
-  }, []);
+    async function fetchData() {
+      try {
+        const response = await listarArmasEmprestadas();
+        const armasemprestadas = response.data;
+        setArmasEmprestadas(armasemprestadas);
+      } catch (error) {
+        console.error("Erro ao listar armas emprestadas:", error);
+        navigate("/armas-emprestadas");
+      }
+    }
+
+    fetchData(); // Chame a função dentro do useEffect
+  }, [navigate]);
 
   async function criarNovaArmaEmprestada(data) {
     try {
       const response = await criarArmaEmprestada(data);
-      const novaArmaEmprestada = response;
+      const novaArmaEmprestada = response.data;
       setSuccessMessage(`Arma emprestada cadastrada com sucesso! ID: ${novaArmaEmprestada.id}`);
       setIsCreated(false);
-      await listarArmasEmprestadas();
+      await listarArmasEmprestadas(); // Você pode manter esta chamada aqui, já que é necessária após a criação
     } catch (error) {
       console.error("Erro ao criar arma emprestada:", error);
-    }
-  }
-
-  async function listarArmasEmprestadas() {
-    try {
-      const armasEmprestadas = await listarArmasEmprestadas();
-      setArmasEmprestadas(armasEmprestadas);
-    } catch (error) {
-      console.error("Erro ao listar armas emprestadas:", error);
-      navigate("/armas-emprestadas");
     }
   }
 
@@ -111,3 +112,4 @@ export function ArmasEmprestadas() {
     </Container>
   );
 }
+

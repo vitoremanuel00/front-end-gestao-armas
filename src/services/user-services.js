@@ -1,4 +1,5 @@
 import { api } from './api'
+import axios from 'axios';
 
 export async function registerUser(data) {
     const result = await api.post('/register', data);

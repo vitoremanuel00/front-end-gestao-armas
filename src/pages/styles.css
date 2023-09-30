@@ -2,6 +2,7 @@
     background-color: #4caf50 !important;
     color: #fff !important;
     border: none !important;
+    size: 500px;
   }
 
   .btn-custom:hover {

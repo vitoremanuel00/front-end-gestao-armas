@@ -30,7 +30,6 @@ export function Armas() {
             setIsCreated(false);
             await findArmas();
         } catch (error) {
-
             if (error.response) {
                 console.error("Resposta de erro do servidor:", error.response.data);
             }
@@ -108,7 +107,7 @@ export function Armas() {
                     ))
                     : <p className="text-center">Não existe nenhuma arma cadastrada!</p>}
             </Col>
-            {/* Formulário dentro do Modal, ideal seria componentizar também, pois é parecido com o Modal de editar */}
+           
             <Modal show={isCreated} onHide={() => setIsCreated(false)}>
                 <Modal.Header>
                     <Modal.Title>Cadastrar nova arma</Modal.Title>

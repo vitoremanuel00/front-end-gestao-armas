@@ -29,7 +29,7 @@ export async function getArmasEmprestadas() {
     return result;
 }
 
-export async function deleteArmasEmprestadas(id) {
+export async function deleteArmaEmprestada(id) {
     const accessToken = sessionStorage.getItem('token');
     const result = await api.delete(`/arma-devolucao?id=${id}`,{
         headers: {
@@ -43,7 +43,7 @@ export async function deleteArmasEmprestadas(id) {
     }
   }
 
-export async function updateArmasEmprestadas(data) {
+export async function updateArmaEmprestada(data) {
     const accessToken = sessionStorage.getItem('token');
     const result = await api.put(`/arma-emprestada/observacoes/${data.id}`, data,{
         observacoes: data.observacoes,

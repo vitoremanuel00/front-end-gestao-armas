@@ -1,19 +1,33 @@
 import React from 'react';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faChartBar } from '@fortawesome/free-solid-svg-icons';
+
+import './styles.css'; // Importe o arquivo de estilo da página de login
 
 export default function HomePage() {
-    return (
-      <div>
-        <h1>Bem-vindo à Página Inicial</h1>
-        <Link to="/armas">
-          <button>Ir para Armas</button>
-        </Link>
-        <Link to="/listaremprestimos">
-          <button>Ir para Armas Emprestadas</button>
-        </Link>
+  return (
+    <Container className="text-center mt-5">
+      <h1>Bem-vindo à Página Inicial</h1>
+      <div className="my-4">
+        <div className="mb-2">
+          <Link to="/armas" className="btn btn-custom btn-lg btn-block d-block mx-auto">
+            Armas em estoque <FontAwesomeIcon icon={faArrowRight} />
+          </Link>
+        </div>
+        <div className="mb-2">
+          <Link to="/listaremprestimos" className="btn btn-custom btn-lg btn-block d-block mx-auto">
+            Armas Emprestadas  <FontAwesomeIcon icon={faArrowRight} />
+          </Link>
+        </div>
+        <div>
+          <Link to="/dashboard" className="btn btn-custom btn-lg btn-block d-block mx-auto">
+            Ir para o Painel de Dashboards <FontAwesomeIcon icon={faChartBar} />
+          </Link>
+        </div>
       </div>
-    );
-  }
-
-
+    </Container>
+  );
+}

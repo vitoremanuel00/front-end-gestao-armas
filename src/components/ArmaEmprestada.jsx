@@ -17,11 +17,15 @@ export function ArmaEmprestada(props) {
         <>
             <Card className="mb-3 p-3 bg-light">
                 <Card.Title><strong>Nome: </strong>{props.armaEmprestada.usuario.nome}</Card.Title>
-                <Card.Text><strong>Modelo: </strong>{props.armaEmprestada.modelo}</Card.Text>
-                {/* <Card.Text><strong>Marca: </strong>{props.armaEmprestada}</Card.Text>*/}
+                <Card.Text><strong>Modelo: </strong>{props.armaEmprestada.arma.modelo}</Card.Text>
+                <Card.Text><strong>Marca: </strong>{props.armaEmprestada.arma.marca}</Card.Text>
                 <Card.Text><strong>Número de Série: </strong>{props.armaEmprestada.arma.numero_de_serie}</Card.Text>
                 <Card.Text><strong>Status: </strong>{props.armaEmprestada.status}</Card.Text>
+                <Card.Text><strong>Observações: </strong>{props.armaEmprestada.observacoes}</Card.Text>
+                <Card.Text><strong>Data de emprestimo: </strong>{props.armaEmprestada.data_emprestimo}</Card.Text>
                 <Card.Text><strong>Data de devoluçao: </strong>{props.armaEmprestada.data_devolucao}</Card.Text>
+
+
                 <Row xs="auto" className="d-flex justify-content-end">
                     <Button variant="secondary" onClick={() => setIsUpdated(true)}>Editar</Button>
                     <Button
@@ -62,3 +66,4 @@ export function ArmaEmprestada(props) {
         </>
     );
 }
+

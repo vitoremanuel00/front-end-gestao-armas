@@ -147,7 +147,7 @@ export default function ArmasEmprestadas() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        
+
         findArmasEmprestadas();
     }, []);
 
@@ -208,8 +208,8 @@ export default function ArmasEmprestadas() {
                 <Col>
                     <Button variant="outline-secondary" onClick={() => {
                         sessionStorage.removeItem('token');
-                        navigate('/');
-                    }}>Sair</Button>
+                        navigate('/home');
+                    }}>Voltar para Página Inicial</Button>
                 </Col>
             </Row>
             {successMessage && (
@@ -266,4 +266,3 @@ export default function ArmasEmprestadas() {
         </Container>
     );
 }
-

@@ -147,6 +147,7 @@ export default function ArmasEmprestadas() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        
         findArmasEmprestadas();
     }, []);
 
@@ -168,8 +169,8 @@ export default function ArmasEmprestadas() {
         try {
             const response = await getArmasEmprestadas();
             const armasEmprestadas = response.data;
-            //console.log(armasEmprestadas);
-            setArmasEmprestadas(armasEmprestadas);
+            console.log(armasEmprestadas.armasEmprestadas);
+            setArmasEmprestadas(armasEmprestadas.armasEmprestadas);
         } catch (error) {
             console.error(error);
             navigate('/listaremprestimos');
@@ -244,7 +245,7 @@ export default function ArmasEmprestadas() {
                             required={true}
                             name='OBS:'
                             error={errors.numero_de_serie}
-                            validations={register('Numero de serie', {
+                            validations={register('numero_de_serie', {
                                 required: {
                                     value: true,
                                     message: 'Numero de serie é obrigatória.'

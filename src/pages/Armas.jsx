@@ -107,7 +107,7 @@ export function Armas() {
                     ))
                     : <p className="text-center">Não existe nenhuma arma cadastrada!</p>}
             </Col>
-           
+
             <Modal show={isCreated} onHide={() => setIsCreated(false)}>
                 <Modal.Header>
                     <Modal.Title>Cadastrar nova arma</Modal.Title>

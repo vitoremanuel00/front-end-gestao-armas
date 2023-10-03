@@ -1,6 +1,6 @@
 import {api} from "./api";
 
-export default async function createArmaEmprestada(data) {
+export async function createArmaEmprestada(data) {
     const accessToken = sessionStorage.getItem('token');
     console.log('Token:', accessToken);
     console.log('Data:', data);
@@ -53,5 +53,3 @@ export async function updateArmaEmprestada(data) {
         });
     return result;
 }
-
-

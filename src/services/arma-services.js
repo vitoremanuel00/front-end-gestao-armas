@@ -56,4 +56,23 @@ export async function updateArma(data) {
 }
 
 
+export async function getModelosdeArmas() {
+    const accessToken = sessionStorage.getItem('token');
+    const result = await api.get('/contagemModelos', {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(accessToken)}`
+        }
+    });
+    console.log("Após a requisição bem-sucedida");
+    return result;
+}
 
+/*export async function getBatalhoesCR() {
+    const accessToken = sessionStorage.getItem('token');
+    const result = await api.get('/batalhoes-cr', {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(accessToken)}`
+        }
+    });
+    return result;
+}*/

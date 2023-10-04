@@ -83,9 +83,8 @@ export function Armas() {
                 </Col>
                 <Col>
                     <Button variant="outline-secondary" onClick={() => {
-                        sessionStorage.removeItem('token');
-                        navigate('/');
-                    }}>Sair</Button>
+                        navigate('/home');
+                    }}>Voltar para Página Inicial</Button>
                 </Col>
             </Row>
             {successMessage && (

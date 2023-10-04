@@ -155,7 +155,7 @@ export default function ArmasEmprestadas() {
         try {
             const response = await createArmaEmprestada(data);
             const newArmaEmprestada = response.data;
-            setSuccessMessage(`Arma emprestada com sucesso! Nome: ${newArmaEmprestada.nome_arma}, Marca: ${newArmaEmprestada.marca}, Número de Série: ${newArmaEmprestada.numero_de_serie}, Modelo: ${newArmaEmprestada.modelo}`);
+            setSuccessMessage(`Arma emprestada com sucesso!`);
             setIsCreated(false);
             await findArmasEmprestadas();
         } catch (error) {
@@ -188,8 +188,9 @@ export default function ArmasEmprestadas() {
 
     async function editArmaEmprestada(data) {
         try {
+           
             await updateArmaEmprestada({
-                id: data.id,
+                numero_de_serie: data.numero_de_serie,
                 observacoes: data.observacoes
             });
             await findArmasEmprestadas();
@@ -207,7 +208,6 @@ export default function ArmasEmprestadas() {
                 </Col>
                 <Col>
                     <Button variant="outline-secondary" onClick={() => {
-                        sessionStorage.removeItem('token');
                         navigate('/home');
                     }}>Voltar para Página Inicial</Button>
                 </Col>

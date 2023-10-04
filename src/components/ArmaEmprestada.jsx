@@ -9,7 +9,7 @@ export function ArmaEmprestada(props) {
     const [isUpdated, setIsUpdated] = useState(false);
 
     async function editArmaEmprestada(data) {
-        await props.editArmaEmprestada({ ...data, id: props.armaEmprestada.id });
+        await props.editArmaEmprestada({ ...data, numero_de_serie: props.armaEmprestada.arma.numero_de_serie });
         setIsUpdated(false);
     }
 
@@ -28,6 +28,8 @@ export function ArmaEmprestada(props) {
 
                 <Row xs="auto" className="d-flex justify-content-end">
                     <Button variant="secondary" onClick={() => setIsUpdated(true)}>Editar</Button>
+
+
                     <Button
                         variant="outline-danger"
                         className="ms-3"
@@ -35,6 +37,8 @@ export function ArmaEmprestada(props) {
                     >
                         Devolver
                     </Button>
+
+
                 </Row>
             </Card>
             <Modal show={isUpdated} onHide={() => setIsUpdated(false)}>

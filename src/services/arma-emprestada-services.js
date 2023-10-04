@@ -45,7 +45,8 @@ export async function deleteArmaEmprestada(id) {
 
 export async function updateArmaEmprestada(data) {
     const accessToken = sessionStorage.getItem('token');
-    const result = await api.put(`/arma-emprestada/observacoes/${data.id}`, data,{
+   
+    const result = await api.put(`/arma-emprestada/${data.numero_de_serie}`, data,{
         observacoes: data.observacoes,
         headers: {
                 'Authorization': `Bearer ${JSON.parse(accessToken)}`

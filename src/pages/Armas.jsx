@@ -15,13 +15,14 @@ export function Armas() {
     const { handleSubmit, register, formState: { errors } } = useForm();
     const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
+    const [selectedModelo, setSelectedModelo] = useState("");
 
     useEffect(() => {
         findArmas();
         // eslint-disable-next-line
     }, []);
 
-        async function addArma(data) {
+    async function addArma(data) {
         try {
 
             const response = await createArma(data);
@@ -38,15 +39,15 @@ export function Armas() {
 
     async function findArmas() {
         try {
-            const response = await getArmas();
-            const armas= response.data;
-
+            const response = await getArmas(selectedModelo); // Passe o modelo selecionado
+            const armas = response.data;
             setArmas(armas);
         } catch (error) {
             console.error(error);
             navigate('/armas');
         }
     }
+
 
     async function removeArma(id) {
         try {
@@ -56,7 +57,6 @@ export function Armas() {
             console.error(error);
         }
     }
-
 
 
     async function editArma(data) {
@@ -74,12 +74,26 @@ export function Armas() {
         }
     }
 
+
+async function findArmasByModelo() {
+  try {
+    const response = await getArmas(selectedModelo); // Passa o modelo como parâmetro
+    const armas = response.data;
+    setArmas(armas);
+  } catch (error) {
+    console.error(error);
+    navigate('/armas');
+  }
+}
+
+
     return (
         <Container fluid>
             <Header title="Armas" />
+
             <Row className="w-50 m-auto mb-5 mt-5 ">
                 <Col md='10'>
-                    <Button onClick={() => setIsCreated(true)}>Criar nova arma</Button>
+                    <Button onClick={() => setIsCreated(true)}>Cadastrar nova arma</Button>
                 </Col>
                 <Col>
                     <Button variant="outline-secondary" onClick={() => {
@@ -94,6 +108,25 @@ export function Armas() {
                     </Col>
                 </Row>
             )}
+
+            <Form.Group>
+                <Form.Label>Filtrar por Modelo</Form.Label>
+                <Form.Select
+                    onChange={(e) => setSelectedModelo(e.target.value)} // Atualiza o estado do modelo
+                    value={selectedModelo}
+                >
+                    <option value="">Todos</option>
+                    <option value="Pistola">Pistola</option>
+                    <option value="Fuzil">Fuzil</option>
+                    <option value="Escopeta">Escopeta</option>
+                </Form.Select>
+            </Form.Group>
+
+
+            {/* Adicione um botão para acionar a consulta por modelo */}
+            <Button variant="primary" onClick={findArmasByModelo}>
+                Filtrar por Modelo
+            </Button>
             <Col className="w-50 m-auto">
                 {armas && armas.length > 0
                     ? armas.map((arma, index) => (

@@ -19,7 +19,7 @@ export async function createArma(data) {
     }
 }
 
-export async function getArmas() {
+/*export async function getArmas() {
         const accessToken = sessionStorage.getItem('token');
         const result = await api.get('/armas', {
             headers: {
@@ -28,6 +28,22 @@ export async function getArmas() {
         });
         console.log("Após a requisição bem-sucedida");
         return result;
+}*/
+export async function getArmas(modelo = "") {
+  const accessToken = sessionStorage.getItem('token');
+  try {
+    const result = await api.get('/armas', {
+      params: { modelo }, // Agora modelo é passado diretamente como uma string
+      headers: {
+        'Authorization': `Bearer ${JSON.parse(accessToken)}`
+      }
+    });
+    console.log("Após a requisição bem-sucedida");
+    return result;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
 }
 
 export async function deleteArma(id) {
@@ -39,6 +55,7 @@ export async function deleteArma(id) {
         });
         return result;
 }
+
 
 export async function updateArma(data) {
         const accessToken = sessionStorage.getItem('token');

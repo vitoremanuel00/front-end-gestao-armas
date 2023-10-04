@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -24,7 +24,7 @@ export default function HomePage() {
         </div>
         <div>
           <Link to="/dashboard" className="btn btn-custom btn-lg btn-block d-block mx-auto">
-            Ir para o Painel de Dashboards <FontAwesomeIcon icon={faChartBar} />
+            Dashboard <FontAwesomeIcon icon={faChartBar} />
           </Link>
         </div>
       </div>

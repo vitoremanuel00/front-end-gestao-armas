@@ -9,3 +9,11 @@
     background-color: #45a049 !important;
   }
 
+  .btn {
+    margin-bottom: 10px; /* Espaçamento na parte inferior dos botões para separá-los verticalmente */
+    padding: 10px 20px; /* Espaçamento interno para ajustar o tamanho dos botões */
+    background-color: #007bff; /* Cor de fundo do botão (exemplo) */
+    color: #fff; /* Cor do texto do botão (exemplo) */
+    border: none; /* Remova a borda (opcional) */
+    cursor: pointer; /* Altera o cursor ao passar o mouse sobre o botão (opcional) */
+  }

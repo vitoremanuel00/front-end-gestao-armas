@@ -6,6 +6,7 @@ import { isAuthenticated } from "./utils/is-authenticated";
 import HomePage from "./pages/HomePage";
 import ArmasEmprestadas from "./pages/ArmasEmprestadas";
 import Dashboards from "./pages/Dashboards";
+import PerfilPage from "./pages/PerfilPage";
 
 /**
  * Cria rotas autenticadas
@@ -28,6 +29,7 @@ export function Navigations() {
                 <Route path="/armas" element={<Armas />} />
                 <Route path="/listaremprestimos" element={<ArmasEmprestadas />} />
                 <Route path="/dashboard" element={<Dashboards />}/>
+                <Route path="/perfil" element={<PerfilPage />}/>
             </Routes>
         </BrowserRouter>
     );

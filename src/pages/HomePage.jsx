@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { faChartBar } from '@fortawesome/free-solid-svg-icons';
+import { faChartBar, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import './styles.css'; // Importe o arquivo de estilo da página de login
 
@@ -25,6 +25,11 @@ export default function HomePage() {
         <div>
           <Link to="/dashboard" className="btn btn-custom btn-lg btn-block d-block mx-auto">
             Dashboard <FontAwesomeIcon icon={faChartBar} />
+          </Link>
+        </div>
+        <div>
+          <Link to="/perfil" className="btn btn-custom btn-lg btn-block d-block mx-auto">
+            Perfil <FontAwesomeIcon icon={faUser} />
           </Link>
         </div>
       </div>
